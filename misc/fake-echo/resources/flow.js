@@ -18,10 +18,10 @@ module.exports = ({ id: aId, posts: aPosts } = {}) => {
     "_links": {
       "self": { "href": "/flows/" + id },
       "next": {
-        "href": `/flows/${id}?after=1a2e11fd-5bb7-4680-8ff7-23ab48c21d4b`
+        "href": `/flows/${id}?after=${posts[0].id}`
       },
       "previous": {
-        "href": `/flows/${id}?before=1a2e11fd-5bb7-4680-8ff7-23ab48c21d4b`
+        "href": `/flows/${id}?before=${posts.slice(-1)[0].id}`
       }
     },
     "_embedded": {
