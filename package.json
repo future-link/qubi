@@ -13,6 +13,6 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "modoki-echo": "node misc/modoki-echo"
+    "fake-echo": "node misc/fake-echo"
   }
 }
