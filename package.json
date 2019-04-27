@@ -7,12 +7,21 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
+    "@types/react": "^16.8.14",
+    "@types/react-dom": "^16.8.4",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
+    "typescript": "^3.4.5",
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "fake-echo": "node misc/fake-echo"
+    "fake-echo": "node misc/fake-echo",
+    "start": "parcel src/index.html"
+  },
+  "dependencies": {
+    "parcel": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
