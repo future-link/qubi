@@ -2,7 +2,7 @@ module.exports = ({ user: aUser, id: aId, createdAt: aCreatedAt, text: aText } =
   const user = aUser || require('./user')()
   const id = aId || require('uuid/v4')()
   const createdAt = aCreatedAt || (new Date()).toISOString()
-  const text = aText || `俺は静かに死ぬ`
+  const text = aText || require('docker-names').getRandomName()
 
   return {
     id,

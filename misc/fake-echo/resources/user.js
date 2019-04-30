@@ -1,9 +1,10 @@
-module.exports = ({ id: aId } = {}) => {
+module.exports = ({ id: aId, handle: aHandle } = {}) => {
   const id = aId || require('uuid/v4')()
+  const handle = aHandle || require('docker-names').getRandomName()
 
   return {
-    "id": id,
-    "handle": 'H' + id,
+    id,
+    handle,
     "name": null,
     "_links": {
       "self": {
