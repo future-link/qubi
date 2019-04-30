@@ -1,27 +1,35 @@
 import * as React from 'react'
-import usePromise from 'react-use-promise'
+const { useState } = React
 
 import Config from '../config'
 import Post from '../components/Post'
 
-export default ({ id = 'local' }: { id?: string }) => {
-  const [result,error,state] = usePromise(
-    () => fetch(Config.api + '/flows/' + id).then(r => r.json()),
-    [id]
-  )
+const fetchAll = async ({ flowId,users,setUsers,posts,setPosts, setTimeoutID, setNextURL, nextURL }) => {
+  const response = await fetch(nextURL ? Config.api + nextURL : Config.api + '/flows/' + flowId).then(r => r.json())
+  setNextURL(response._links.next.href)
+  const { users: rUsers, posts: rPosts } = response._embedded
+  const usersById = rUsers.reduce((uBI, user) => ({...uBI, [user.id]: user}), {})
+  setUsers({...users, ...usersById})
+  setPosts([...rPosts, ...posts].slice(0, 100))
+  setTimeoutID(0)
+}
 
-  if (state !== 'resolved') {
-    return error ? (<>{error.message}</>) : (<>UNRESOLVED!</>)
+export default ({ id: flowId = 'local' }: { id?: string }) => {
+  const [users, setUsers] = useState({})
+  const [posts, setPosts] = useState([])
+  const [nextURL, setNextURL] = useState('')
+  const [timeoutID, setTimeoutID] = useState(0)
+
+  if (!timeoutID) {
+    const id = setTimeout(() => fetchAll({ flowId, users, setUsers, posts, setPosts, setTimeoutID, nextURL, setNextURL }), 1000)
+    setTimeoutID(id)
   }
-
-  const { users = [], posts = [] } = result._embedded
-  const usersById = users.reduce((uBI, user) => ({...uBI, [user.id]: user}), {})
 
   return (
     <ul>
       {posts.map(post => (
         <li key={post.id}>
-          <Post post={post} author={usersById[post.author]} />
+          <Post post={post} author={users[post.author]} />
         </li>
       ))}
     </ul>
