@@ -9,6 +9,10 @@ const createFlow = require('./resources/flow')
  
 const api = Express()
 api.use(BodyParser.json())
+api.use((_,res,next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  next()
+})
 api.get('/', (_,res) => res.json(createIndex()))
 api.post('/posts', (req,res) => res.json(createPost({ text: req.body.text })))
 api.get('/flows/:id', (req,res) => res.json(createFlow({ id: req.params.id })))
