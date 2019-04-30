@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import { createBrowserHistory } from "history"
 
 import NotFound from './components/NotFound'
-import Flow from './containers/Flow'
+import Home from './containers/Home'
 
 const isAuthed = false
 function PrivateRoute ({ component: Component, ...props }) {
@@ -19,14 +19,14 @@ function PrivateRoute ({ component: Component, ...props }) {
       } />)
 }
 
-const Index = () => (<>INDEX CHAN EDSU</>)
-
 const history = createBrowserHistory()
 render((
   <Router history={history}>
     <Switch>
-      <Route exact path="/" component={Flow} />
-      <PrivateRoute path="/pospospo" component={Index} />
+      <PrivateRoute exact path="/" component={Home} />
+      {/* After auth implemented, this will be removed */}
+      <Route exact path="/local" component={Home} />
+      <Route exact path="/login" component={({ location }) => (<div>LOGIN from {location.state.from.pathname}</div>) } />
       <Route component={NotFound} />
     </Switch>
   </Router>
