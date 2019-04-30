@@ -20,8 +20,8 @@ export default ({ id = 'local' }: { id?: string }) => {
   return (
     <ul>
       {posts.map(post => (
-        <li>
-          <Post key={post.id} post={post} author={usersById[post.author]} />
+        <li key={post.id}>
+          <Post post={post} author={usersById[post.author]} />
         </li>
       ))}
     </ul>

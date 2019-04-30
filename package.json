@@ -7,8 +7,11 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
+    "@types/history": "^4.7.2",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
+    "@types/react-router": "^4.4.5",
+    "@types/react-router-dom": "^4.3.2",
     "body-parser": "^1.19.0",
     "docker-names": "^1.1.1",
     "express": "^4.16.4",
@@ -21,7 +24,6 @@
     "start": "parcel src/index.html"
   },
   "dependencies": {
-    "@types/history": "^4.7.2",
     "parcel": "^1.12.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
