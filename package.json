@@ -24,6 +24,7 @@
     "start": "parcel src/index.html"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "parcel": "^1.12.3",
     "prop-types": ">=15.6.0",
     "react": "^16.3.0",
